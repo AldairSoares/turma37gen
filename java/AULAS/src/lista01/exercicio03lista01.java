@@ -13,7 +13,7 @@ public class exercicio03lista01 {
 		int minutos;
 		int horas;
 		
-		System.out.println("Quantos segundos o evento durou?")
+		System.out.println("Quantos segundos o evento durou?");
 		
 		segundosTotais = leia.nextInt();
 		
@@ -21,7 +21,7 @@ public class exercicio03lista01 {
 		minutos = (segundosTotais - horas*3600)/ 60;
 		segundos = (segundosTotais % 60);
 		
-		System.out.printf("A hora: %d : %d : %d", horas,minutos, segundos);
+		System.out.printf("A quantidade de horas: %d : %d : %d", horas,minutos, segundos);
 
 	}
 
