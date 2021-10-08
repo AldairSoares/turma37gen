@@ -1,0 +1,74 @@
+package application;
+
+import java.util.Scanner;
+
+import entities.Pessoa;
+import entities.Produto;
+
+public class CadAmigo {
+
+	public static void main(String[] args) {
+		// Instanciar a classe
+		
+		
+		
+		Pessoa cad1 = new Pessoa();
+		Produto p1  = new Produto();
+		int qtde = 0;
+		
+		Scanner leia = new Scanner(System.in);
+		
+		
+		
+		System.out.print("Digite o nome do amigo : ");
+        cad1.nome = leia.next();
+		
+		System.out.print("Digite 1-masculino, 2-feminina, 3-neutre :");
+        char op = leia.next().charAt(0);
+        if (op=='1') {
+            cad1.pronome = 'o';
+        } else if (op=='2') {
+            cad1.pronome = 'a';
+        } else {
+            cad1.pronome = 'e';
+        }
+        System.out.printf("Bom dia Sr%c. %s, sua idade aproxima é %d anos.\n",cad1.pronome,cad1.nome.toUpperCase(),cad1.calcularIdade(2021));
+        
+        System.out.print("Digite o código que você deseja: ");
+        p1.codigo = leia.next();
+        
+        
+        System.out.print("Quer colocar(1) ou tirar(2) do estoque: ");
+        op = leia.next().charAt(0);
+        
+        if (op == '1') 
+        {
+            System.out.print("Digite quantidade que você deseja colocar: ");
+            qtde = leia.nextInt();
+            p1.colocarEstoque(qtde);
+        }
+        else 
+        {
+            System.out.print("Digite quantidade que você deseja tirar: ");
+            qtde = leia.nextInt();
+            p1.tirarEstoque(qtde);
+        }
+        
+        System.out.println(p1.toString());
+        System.out.println(cad1.toString());
+
+        
+        
+        
+        leia.close();
+    }
+        
+	
+        
+	
+	
+}
+
+
+
+
