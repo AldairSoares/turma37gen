@@ -1,22 +1,27 @@
-package org.generation.blogPessoal.model;
+package org.generation.blogPessoal.dto;
 
-public class UserLogin {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+/**
+ * 
+ * @author aldairsoares
+ * @version 1.0
+ *
+ */
+
+public class UserLoginDTO {
 	
-	private String nome;
 	
+	
+	@NotBlank(message = "Insert a valid username")
 	private String usuario;
 	
+	@NotBlank
+	@Size(min =8, max =100, message = "Write at least 8 characters")
 	private String senha;
 	
 	private String token;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 	public String getUsuario() {
 		return usuario;
@@ -41,6 +46,5 @@ public class UserLogin {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
 	
 }
