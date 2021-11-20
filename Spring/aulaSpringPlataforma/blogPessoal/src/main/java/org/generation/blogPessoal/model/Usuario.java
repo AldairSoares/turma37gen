@@ -13,11 +13,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 @Entity
 @Table(name = "tb_usuarios")
@@ -29,43 +29,66 @@ public class Usuario {
 	@NotBlank(message = "O atributo nome é obrigatório")
 	@Size(min = 5, max = 100, message = "O atributo nome deve ter no mínimo 05 e no máximo 100 caracteres")
 	private String nome;
+	
 	@NotBlank(message = "O atributo usuário é obrigatório")
 	@NotBlank(message = "O atributo usuário não pode ser vazio")
 	@Email(message = "O atributo usuário deve ser um email")
 	private String usuario;
+	
+	
+	private String foto;
+	
 	@NotBlank(message = "O atributo senha é obrigatório")
 	@Size(min = 8, message = "O atributo senha deve ter no mínimo 8 caracteres")
 	private String senha;
+	
 	@Column(name = "dt_nascimento")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;
+	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
 
-// Primeiro método Construtor - Com os atributos
-	public Usuario(long id, String nome, String usuario, String senha, LocalDate dataNascimento) {
-		this.id = id;
-		this.nome = nome;
-		this.usuario = usuario;
-		this.senha = senha;
-		this.dataNascimento = dataNascimento;
-	}
+	@NotNull
+	private String token;
+	
+	
 
-// Segundo método Construtor - Sem os atributos
+// Primeiro método Construtor - Sem os atributos
 	public Usuario() {
 	}
 
+// Segundo método Construtor - Com os atributos
+	
+
 	public long getId() {
-		return this.id;
+		return id;
 	}
+
+	public Usuario(long id,
+		@NotBlank(message = "O atributo nome é obrigatório") @Size(min = 5, max = 100, message = "O atributo nome deve ter no mínimo 05 e no máximo 100 caracteres") String nome,
+		@NotBlank(message = "O atributo usuário é obrigatório") @NotBlank(message = "O atributo usuário não pode ser vazio") @Email(message = "O atributo usuário deve ser um email") String usuario,
+		String foto,
+		@NotBlank(message = "O atributo senha é obrigatório") @Size(min = 8, message = "O atributo senha deve ter no mínimo 8 caracteres") String senha,
+		LocalDate dataNascimento, List<Postagem> postagem, @NotNull String token) {
+	super();
+	this.id = id;
+	this.nome = nome;
+	this.usuario = usuario;
+	this.foto = foto;
+	this.senha = senha;
+	this.dataNascimento = dataNascimento;
+	this.postagem = postagem;
+	this.token = token;
+}
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
@@ -73,15 +96,23 @@ public class Usuario {
 	}
 
 	public String getUsuario() {
-		return this.usuario;
+		return usuario;
 	}
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public String getSenha() {
-		return this.senha;
+		return senha;
 	}
 
 	public void setSenha(String senha) {
@@ -89,7 +120,7 @@ public class Usuario {
 	}
 
 	public LocalDate getDataNascimento() {
-		return this.dataNascimento;
+		return dataNascimento;
 	}
 
 	public void setDataNascimento(LocalDate dataNascimento) {
@@ -97,11 +128,24 @@ public class Usuario {
 	}
 
 	public List<Postagem> getPostagem() {
-		return this.postagem;
+		return postagem;
 	}
 
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
-
 	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	
+	
+	
+	
+
 }
